@@ -1,0 +1,24 @@
+﻿@model List<WebApplication1.Models.Entities.Students>
+@{
+    ViewBag.Title = "ListOfStudents";
+}
+
+<h2>Список участников опроса</h2>
+
+@Html.ActionLink("Добавить студента", "CreateStudents", "Lab2", new { @class = "btn btn-default"})
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th class="text-center">Наименование</th>
+            <th class="text-center">Возраст</th>
+            <th class="text-center">Guid</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var students in Model)
+        {
+            @Html.Partial("StudentOverviewPartial", students);
+        }
+    </tbody>
+</table>

@@ -1,0 +1,11 @@
+﻿@model WebApplication1.Models.Entities.Students
+<div class="row">
+    <div class="col-md-5">@Model.LastName, @Model.FirstName, @Model.MiddleName
+        (@Html.Action("HavingGroups", new { studentID = Model.StudentID})
+    </div>
+    <div class="col-md-1">@(DateTime.Now.Year - Model.DateOfBirth.Year)</div>
+    <div class="col-md-2">@Html.ActionLink("подробнее", "PersonDetails", "Lab2", new { studentId = Model.StudentID }, null)</div>
+    <div class="col-md-2">@Html.ActionLink("Edit", "EditStudent", new { controller = "Lab2", studentID = Model.StudentID })</div>
+    <div class="col-md-2">@Html.ActionLink("удалить", "DeleteStudent", new { controller = "Lab2", studentID = Model.StudentID })</div>
+</div>
+ 

@@ -1,0 +1,224 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище I21_KhozhanetsRVModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Groups">
+          <Key>
+            <PropertyRef Name="GroupID" />
+          </Key>
+          <Property Name="GroupID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="InstituteID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="YearOfAdmission" Type="int" Nullable="false" />
+          <Property Name="StudyFormID" Type="int" Nullable="false" />
+          <Property Name="Duration" Type="int" Nullable="false" />
+          <Property Name="TrainingDirectionID" Type="char" MaxLength="8" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Students">
+          <Key>
+            <PropertyRef Name="StudentID" />
+          </Key>
+          <Property Name="StudentID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="MiddleName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Gender" Type="bit" Nullable="false" />
+          <Property Name="Address" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="DateOfBirth" Type="date" Nullable="false" />
+          <Property Name="EducationLevel" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="StudentsInGroups">
+          <Key>
+            <PropertyRef Name="StudentID" />
+            <PropertyRef Name="GroupID" />
+          </Key>
+          <Property Name="StudentID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="GroupID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="PaymentFormID" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__StudentsI__Group__5812160E">
+          <End Role="Groups" Type="Self.Groups" Multiplicity="1" />
+          <End Role="StudentsInGroups" Type="Self.StudentsInGroups" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Groups">
+              <PropertyRef Name="GroupID" />
+            </Principal>
+            <Dependent Role="StudentsInGroups">
+              <PropertyRef Name="GroupID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__StudentsI__Stude__571DF1D5">
+          <End Role="Students" Type="Self.Students" Multiplicity="1" />
+          <End Role="StudentsInGroups" Type="Self.StudentsInGroups" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Students">
+              <PropertyRef Name="StudentID" />
+            </Principal>
+            <Dependent Role="StudentsInGroups">
+              <PropertyRef Name="StudentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище I21_KhozhanetsRVModelContainer">
+          <EntitySet Name="Groups" EntityType="Self.Groups" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Students" EntityType="Self.Students" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StudentsInGroups" EntityType="Self.StudentsInGroups" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__StudentsI__Group__5812160E" Association="Self.FK__StudentsI__Group__5812160E">
+            <End Role="Groups" EntitySet="Groups" />
+            <End Role="StudentsInGroups" EntitySet="StudentsInGroups" />
+          </AssociationSet>
+          <AssociationSet Name="FK__StudentsI__Stude__571DF1D5" Association="Self.FK__StudentsI__Stude__571DF1D5">
+            <End Role="Students" EntitySet="Students" />
+            <End Role="StudentsInGroups" EntitySet="StudentsInGroups" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="I21_KhozhanetsRVModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Groups">
+          <Key>
+            <PropertyRef Name="GroupID" />
+          </Key>
+          <Property Name="GroupID" Type="Guid" Nullable="false" />
+          <Property Name="InstituteID" Type="Guid" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="YearOfAdmission" Type="Int32" Nullable="false" />
+          <Property Name="StudyFormID" Type="Int32" Nullable="false" />
+          <Property Name="Duration" Type="Int32" Nullable="false" />
+          <Property Name="TrainingDirectionID" Type="String" MaxLength="8" FixedLength="true" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="StudentsInGroups" Relationship="Self.FK__StudentsI__Group__5812160E" FromRole="Groups" ToRole="StudentsInGroups" />
+        </EntityType>
+        <EntityType Name="Students">
+          <Key>
+            <PropertyRef Name="StudentID" />
+          </Key>
+          <Property Name="StudentID" Type="Guid" Nullable="false" />
+          <Property Name="LastName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FirstName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MiddleName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Gender" Type="Boolean" Nullable="false" />
+          <Property Name="Address" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DateOfBirth" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="EducationLevel" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="StudentsInGroups" Relationship="Self.FK__StudentsI__Stude__571DF1D5" FromRole="Students" ToRole="StudentsInGroups" />
+        </EntityType>
+        <EntityType Name="StudentsInGroups">
+          <Key>
+            <PropertyRef Name="StudentID" />
+            <PropertyRef Name="GroupID" />
+          </Key>
+          <Property Name="StudentID" Type="Guid" Nullable="false" />
+          <Property Name="GroupID" Type="Guid" Nullable="false" />
+          <Property Name="PaymentFormID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Groups" Relationship="Self.FK__StudentsI__Group__5812160E" FromRole="StudentsInGroups" ToRole="Groups" />
+          <NavigationProperty Name="Students" Relationship="Self.FK__StudentsI__Stude__571DF1D5" FromRole="StudentsInGroups" ToRole="Students" />
+        </EntityType>
+        <Association Name="FK__StudentsI__Group__5812160E">
+          <End Role="Groups" Type="Self.Groups" Multiplicity="1" />
+          <End Role="StudentsInGroups" Type="Self.StudentsInGroups" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Groups">
+              <PropertyRef Name="GroupID" />
+            </Principal>
+            <Dependent Role="StudentsInGroups">
+              <PropertyRef Name="GroupID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__StudentsI__Stude__571DF1D5">
+          <End Role="Students" Type="Self.Students" Multiplicity="1" />
+          <End Role="StudentsInGroups" Type="Self.StudentsInGroups" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Students">
+              <PropertyRef Name="StudentID" />
+            </Principal>
+            <Dependent Role="StudentsInGroups">
+              <PropertyRef Name="StudentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Groups" EntityType="Self.Groups" />
+          <EntitySet Name="Students" EntityType="Self.Students" />
+          <EntitySet Name="StudentsInGroups" EntityType="Self.StudentsInGroups" />
+          <AssociationSet Name="FK__StudentsI__Group__5812160E" Association="Self.FK__StudentsI__Group__5812160E">
+            <End Role="Groups" EntitySet="Groups" />
+            <End Role="StudentsInGroups" EntitySet="StudentsInGroups" />
+          </AssociationSet>
+          <AssociationSet Name="FK__StudentsI__Stude__571DF1D5" Association="Self.FK__StudentsI__Stude__571DF1D5">
+            <End Role="Students" EntitySet="Students" />
+            <End Role="StudentsInGroups" EntitySet="StudentsInGroups" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище I21_KhozhanetsRVModelContainer" CdmEntityContainer="Entities">
+          <EntitySetMapping Name="Groups">
+            <EntityTypeMapping TypeName="I21_KhozhanetsRVModel.Groups">
+              <MappingFragment StoreEntitySet="Groups">
+                <ScalarProperty Name="GroupID" ColumnName="GroupID" />
+                <ScalarProperty Name="InstituteID" ColumnName="InstituteID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="YearOfAdmission" ColumnName="YearOfAdmission" />
+                <ScalarProperty Name="StudyFormID" ColumnName="StudyFormID" />
+                <ScalarProperty Name="Duration" ColumnName="Duration" />
+                <ScalarProperty Name="TrainingDirectionID" ColumnName="TrainingDirectionID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Students">
+            <EntityTypeMapping TypeName="I21_KhozhanetsRVModel.Students">
+              <MappingFragment StoreEntitySet="Students">
+                <ScalarProperty Name="StudentID" ColumnName="StudentID" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+                <ScalarProperty Name="EducationLevel" ColumnName="EducationLevel" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StudentsInGroups">
+            <EntityTypeMapping TypeName="I21_KhozhanetsRVModel.StudentsInGroups">
+              <MappingFragment StoreEntitySet="StudentsInGroups">
+                <ScalarProperty Name="StudentID" ColumnName="StudentID" />
+                <ScalarProperty Name="GroupID" ColumnName="GroupID" />
+                <ScalarProperty Name="PaymentFormID" ColumnName="PaymentFormID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

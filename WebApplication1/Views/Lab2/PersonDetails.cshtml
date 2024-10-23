@@ -1,0 +1,46 @@
+﻿@model  WebApplication1.Models.Entities.Students
+@{
+    ViewBag.Title = "StudentsDetails";
+}
+<h2>PersonDetails</h2>
+<h4>Student</h4>
+<hr />
+
+<div class="row">
+    <div class="col-md-1">@Html.LabelFor(m => m.LastName)</div>
+    <div class="col-md-3">@Html.DisplayFor(m => m.LastName)</div>
+
+    <div class="col-md-1">@Html.LabelFor(m => m.FirstName)</div>
+    <div class="col-md-3">@Html.DisplayFor(m => m.FirstName)</div>
+
+    <div class="col-md-1">@Html.LabelFor(m => m.MiddleName)</div>
+    <div class="col-md-3">@Html.DisplayFor(m => m.MiddleName)</div>
+
+    <div class="col-md-1">@Html.LabelFor(m => m.Address)</div>
+    <div class="col-md-3">@Html.DisplayFor(m => m.Address)</div>
+</div>
+
+<div class="row">
+    <div class="col-md-1">@Html.LabelFor(m => m.StudentID)</div>
+    <div class="col-md-3">@Html.DisplayFor(m => m.StudentID)</div>
+
+    <div class="col-md-1">@Html.LabelFor(m => m.Gender)</div>
+    <div class="col-md-3">
+        @(Model.Gender ? "м" : "ж")
+    </div>
+
+
+    <div class="col-md-1">@Html.LabelFor(m => m.EducationLevel)</div>
+    <div class="col-md-3">@Html.DisplayFor(m => m.EducationLevel)</div>
+
+    <div class="col-md-1">@Html.LabelFor(m => m.DateOfBirth)</div>
+    <div class="col-md-3">@Html.DisplayFor(m => m.DateOfBirth)</div>
+</div>
+
+
+
+
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.StudentID })
+    @Html.ActionLink("Back to List", "ListOfPeople")
+</p>
